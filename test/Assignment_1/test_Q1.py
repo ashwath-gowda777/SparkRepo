@@ -1,6 +1,6 @@
 import unittest
 from pyspark.sql import SparkSession
-from src.Assignment_1.utils import *
+from SparkRepo.src.Assignment_1.utils import *
 
 class TestMySparkFunctions(unittest.TestCase):
     def setUp(self):
