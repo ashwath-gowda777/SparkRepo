@@ -1,5 +1,6 @@
 from pyspark.sql.functions import *
 
+#
 def unique_location_count(df_users, df_transactions, spark):
     df_users = df_users.select([col(c).alias(c.replace(" ", "")) for c in df_users.columns])
     df_transactions = df_transactions.select([col(c).alias(c.replace(" ", "")) for c in df_transactions.columns])
