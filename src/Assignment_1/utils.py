@@ -1,6 +1,6 @@
 from pyspark.sql.functions import *
 
-#
+#Count of unique locations where each product is sold.
 def unique_location_count(df_users, df_transactions, spark):
     df_users = df_users.select([col(c).alias(c.replace(" ", "")) for c in df_users.columns])
     df_transactions = df_transactions.select([col(c).alias(c.replace(" ", "")) for c in df_transactions.columns])
@@ -9,6 +9,7 @@ def unique_location_count(df_users, df_transactions, spark):
     result_df1 = df_join.select("product_id", "location").distinct().groupBy("product_id", "location").agg(count("location").alias("count_unique_locations"))
     return result_df1
 
+#Find out products bought by each user.
 def products_bought(df_users, df_transactions, spark):
     df_users = df_users.select([col(c).alias(c.replace(" ", "")) for c in df_users.columns])
     df_transactions = df_transactions.select([col(c).alias(c.replace(" ", "")) for c in df_transactions.columns])
@@ -17,6 +18,7 @@ def products_bought(df_users, df_transactions, spark):
     result_df2 = df_join.groupBy("userid").agg(collect_list("product_id").alias("products"))
     return result_df2
 
+#c)	Total spending done by each user on each product.
 def total_spending(df_users, df_transactions, spark):
     df_users = df_users.select([col(c).alias(c.replace(" ", "")) for c in df_users.columns])
     df_transactions = df_transactions.select([col(c).alias(c.replace(" ", "")) for c in df_transactions.columns])
